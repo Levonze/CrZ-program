@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3 uid="uid://8n56gnitbofj"]
+
+[sub_resource type="GDScript" id="GDScript_ry1lq"]
+resource_name = "TheoryHandler"
+script/source = "extends Control
+
+var vbox
+var config = ConfigFile.new()
+
+const TheoryText = \"res://theory.cfg\"
+
+func _init():
+	pass
+
+func _ready():
+	vbox = %MainVBox
+	if config.load(\"res://theory.cfg\") != 1:
+		for section in config.get_sections():
+			var header = config.get_value(section, \"header\")
+			var content = config.get_value(section, \"content\")
+			print(header, content)
+	else:
+		var label := Label.new()
+		label.text = \"Unable to load theory.cfg file\"
+		vbox.add_child(label)
+"
+
+[node name="Theory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_ry1lq")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainVBox" type="VBoxContainer" parent="CanvasLayer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 2
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

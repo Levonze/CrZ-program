@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwgx35egqqe80"]
+
+[ext_resource type="LabelSettings" uid="uid://cts3xljmbrsv7" path="res://assets/TextFonts/content_ls.tres" id="1_gt768"]
+
+[sub_resource type="GDScript" id="GDScript_gt768"]
+resource_name = "Resizing"
+script/source = "extends Control
+
+func size_control_to_label():
+	var lbl := self.get_node(\"Label\")
+
+	lbl.call_deferred(\"update\")
+	self.call_deferred(\"_apply_label_size_deferred\", \"Label\")
+
+func _apply_label_size_deferred(label_path: String) -> void:
+	var lbl := self.get_node_or_null(label_path) as Label
+	if lbl == null: return
+	var sz := lbl.get_minimum_size()
+	sz.x += lbl.margin_left + lbl.margin_right
+	sz.y += lbl.margin_top + lbl.margin_bottom
+
+	self.rect_min_size = sz
+	if self.get_parent() and self.get_parent() is Container:
+		self.get_parent().call_deferred(\"queue_sort\")
+"
+
+[node name="FormulaContainer" type="Control"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_gt768")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 6.0
+grow_vertical = 2
+color = Color(0, 1, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 24)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Test text"
+label_settings = ExtResource("1_gt768")
