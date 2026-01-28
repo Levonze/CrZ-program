@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://8n56gnitbofj"]
+
+[sub_resource type="GDScript" id="GDScript_ry1lq"]
+resource_name = "TheoryHandler"
+script/source = "extends Control
+
+var vbox
+var config = ConfigFile.new()
+
+var header_ls = load(\"res://assets/TextFonts/header_ls.tres\")
+var content_ls = load(\"res://assets/TextFonts/content_ls.tres\")
+
+const TheoryText = \"res://theory.cfg\"
+
+func line_count(s: String) -> int:
+	if s == \"\": return 0
+	var normalized := s.replace(\"\\r\\n\", \"\\n\").replace(\"\\r\", \"\\n\")
+	var parts := normalized.split(\"\\n\", false)
+	if parts.size() > 0 and parts[parts.size() - 1] == \"\":
+		parts.remove_at(parts.size() - 1)
+	return parts.size()
+
+
+
+func _ready():
+	vbox = %MainVBox
+	var intended_parent = vbox
+	if config.load(\"res://theory.cfg\") == OK:
+		for section in config.get_sections():
+			var rich = config.get_value(sectcion, \"rich\", false)
+			var margin = config.get_value(section, \"margin\", false)
+			var header = config.get_value(section, \"header\", \"\")
+			var content = config.get_value(section, \"content\", \"\")
+			var formula = config.get_value(section, \"formula\", \"\")
+			var img = config.get_value(section, \"image\", \"\")
+			
+			if margin:
+				var separator = HSeparator.new()
+				intended_parent.add_child(separator)
+			if header != \"\":
+				var headerlabel = Label.new()
+				headerlabel.text = header
+				headerlabel.label_settings = header_ls
+				headerlabel.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+				intended_parent.add_child(headerlabel)
+			if content != \"\":
+				var label
+				if rich == true:
+					label = RichTextLabel.new()
+					label.fit_content = true
+					label.bbcode_enabled = true
+				else:
+					label = Label.new()
+				label.text = content
+				#label.label_settings = content_ls
+				intended_parent.add_child(label)
+			if formula != \"\":
+				var form_cont_scene := load(\"res://assets/Containers/FormulaContainer.tscn\") as PackedScene
+				var form_cont := form_cont_scene.instantiate()
+				form_cont.get_node(\"Label\").bbcode_text = formula
+				form_cont.custom_minimum_size = Vector2(0, line_count(formula)*20*1.5)
+				intended_parent.add_child(form_cont)
+			if img != \"\":
+				var imgw = TextureRect.new()
+				imgw.texture = load(img)
+				imgw.stretch_mode = TextureRect.STRETCH_SCALE
+				imgw.expand_mode = TextureRect.EXPAND_FIT_HEIGHT_PROPORTIONAL
+				intended_parent.add_child(imgw)
+	else:
+		print(\"Failed to load cfg\")
+		print(config.get_sections())
+"
+
+[sub_resource type="GDScript" id="GDScript_i816f"]
+resource_name = "OpenScene"
+script/source = "extends Button
+
+
+
+func _pressed():
+	get_tree().change_scene_to_file(\"res://scenes/Tasks.tscn\")
+"
+
+[node name="Theory" type="Control" unique_id=1714347494]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = SubResource("GDScript_ry1lq")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=2008660064]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainVBox" type="VBoxContainer" parent="ScrollContainer" unique_id=275459765]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 2
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1533287463]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Button" type="Button" parent="." unique_id=1074607351]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -103.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "К заданиям"
+script = SubResource("GDScript_i816f")
