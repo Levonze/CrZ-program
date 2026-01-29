@@ -14,6 +14,10 @@ var content_ls = load(\"res://assets/TextFonts/content_ls.tres\")
 
 const TheoryText = \"res://theory.cfg\"
 
+func toggledebug():
+	get_tree().current_scene.debug = not debug
+	LimboConsole.info(\"Debug state: \" + str(get_tree().current_scene.debug))
+
 func line_count(s: String) -> int:
 	if s == \"\": return 0
 	var normalized := s.replace(\"\\r\\n\", \"\\n\").replace(\"\\r\", \"\\n\")
@@ -23,6 +27,9 @@ func line_count(s: String) -> int:
 	return parts.size()
 
 func _ready() -> void:
+	if LimboConsole.get_command_names().find(\"debug\") <= 0:
+		LimboConsole.register_command(toggledebug, \"debug\", \"toggles the debug mode\")
+		
 	vbox = %MainVBox
 	var intended_parent: Control = vbox
 
@@ -44,7 +51,6 @@ func _ready() -> void:
 				headerlabel.fit_content = true
 				headerlabel.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 				intended_parent.add_child(headerlabel)
-				$Button2.visible = true
 
 			if margin:
 				var separator := HSeparator.new()
@@ -151,20 +157,11 @@ grow_vertical = 0
 text = "К заданиям"
 script = SubResource("GDScript_i816f")
 
-[node name="Button2" type="Button" parent="." unique_id=277133700]
-visible = false
+[node name="ReloadBtn" type="Button" parent="." unique_id=277133700]
+modulate = Color(1, 1, 1, 0.003921569)
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -105.0
-offset_top = -249.0
-offset_right = -2.0
-offset_bottom = -218.0
-grow_horizontal = 0
-grow_vertical = 0
+offset_right = 61.0
+offset_bottom = 31.0
 text = "Reload"
 script = SubResource("GDScript_hwyk8")
 
