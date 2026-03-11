@@ -1,0 +1,516 @@
+[gd_scene format=3 uid="uid://b1l7c8jfcpevv"]
+
+[ext_resource type="Theme" uid="uid://c71srdrc14t5l" path="res://assets/Styles/MainTheme.res" id="1_c48n2"]
+[ext_resource type="Material" uid="uid://dukyx6tbw7dux" path="res://assets/Shaders/blur.tres" id="2_jdkty"]
+[ext_resource type="Script" uid="uid://d3k7ijmmnmxra" path="res://assets/RichTextEffects/SubTag.gd" id="3_j8hbm"]
+[ext_resource type="Script" uid="uid://dv0mnnio2bkjr" path="res://assets/RichTextEffects/SupTag.gd" id="4_24qj6"]
+[ext_resource type="Script" uid="uid://bff7rulvuqdnu" path="res://scenes/task.gd" id="5_j8hbm"]
+[ext_resource type="Script" uid="uid://liwd686tdt1g" path="res://assets/Resources/task_resource.gd" id="6_6qyph"]
+[ext_resource type="Script" uid="uid://c4j17qhmdn2o7" path="res://assets/Resources/TaskContainer.gd" id="7_u4l1f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xufst"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_6qyph"]
+script = ExtResource("3_j8hbm")
+metadata/_custom_type_script = "uid://d3k7ijmmnmxra"
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_u4l1f"]
+script = ExtResource("4_24qj6")
+metadata/_custom_type_script = "uid://dv0mnnio2bkjr"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j8hbm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_24qj6"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_j8hbm"]
+thickness = 2
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_24qj6"]
+grow_begin = 11.0
+grow_end = 11.0
+thickness = 2
+vertical = true
+
+[sub_resource type="Theme" id="Theme_6qyph"]
+default_font_size = 40
+
+[sub_resource type="GDScript" id="GDScript_6qyph"]
+script/source = "extends LineEdit
+
+var t = \"ē ↓ \"
+
+func update(n:String):
+	text = t
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_6qyph"]
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0b5v6"]
+bg_color = Color(0, 0, 0, 0.6)
+
+[sub_resource type="LabelSettings" id="LabelSettings_c48n2"]
+font_size = 45
+
+[sub_resource type="Resource" id="Resource_6qyph"]
+script = ExtResource("6_6qyph")
+anod_formula = "Fe-2ē=Fe2+"
+katod_formula = "O2+2H2O+4ē=4OH-"
+ion_formula = "2Fe+O2+2H2O=2Fe2++4OH-"
+molekula_formula = "2Fe+O2+2H2O=2Fe(OH)2↓"
+metadata/_custom_type_script = "uid://liwd686tdt1g"
+
+[sub_resource type="Resource" id="Resource_u4l1f"]
+script = ExtResource("6_6qyph")
+anod_formula = "Fe-2ē=Fe2+"
+katod_formula = "O2+2H2O+4ē=4OH-"
+ion_formula = "2Fe+O2+2H2O=2Fe2++4OH-"
+molekula_formula = "2Fe+O2+2H2O=2Fe(OH)2↓"
+metadata/_custom_type_script = "uid://liwd686tdt1g"
+
+[sub_resource type="Resource" id="Resource_20le8"]
+script = ExtResource("7_u4l1f")
+Tasks = Array[ExtResource("6_6qyph")]([SubResource("Resource_6qyph"), SubResource("Resource_u4l1f")])
+metadata/_custom_type_script = "uid://c4j17qhmdn2o7"
+
+[sub_resource type="GDScript" id="GDScript_u4l1f"]
+script/source = "extends Timer
+
+func _ready() -> void:
+	self.timeout.connect(timeout_f)
+
+func timeout_f():
+	$\"../TaskHandler\".load_task(GameInstance.task_id)
+	$\"../LoadingPanel\".hide()
+"
+
+[node name="Task" type="Control" unique_id=1019720719]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_c48n2")
+
+[node name="Task" type="Panel" parent="." unique_id=334360213]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_right = 0.9
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xufst")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Task" unique_id=7896584]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Task/VBoxContainer" unique_id=1388249897]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Task/VBoxContainer/HBoxContainer2" unique_id=1782556791]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "Коррозия возможна, так как
+"
+fit_content = true
+scroll_active = false
+custom_effects = [SubResource("RichTextEffect_6qyph"), SubResource("RichTextEffect_u4l1f")]
+
+[node name="TaskElement" type="RichTextLabel" parent="Task/VBoxContainer/HBoxContainer2" unique_id=658686421]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "{NO_FORMULA}
+"
+fit_content = true
+scroll_active = false
+custom_effects = [SubResource("RichTextEffect_6qyph"), SubResource("RichTextEffect_u4l1f")]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Task/VBoxContainer" unique_id=498098723]
+layout_mode = 2
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Task/VBoxContainer/HBoxContainer" unique_id=1212044377]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.75
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[b][i]Схема микрогальванического элемента[/i][/b]: 
+"
+fit_content = true
+scroll_active = false
+custom_effects = [SubResource("RichTextEffect_6qyph"), SubResource("RichTextEffect_u4l1f")]
+
+[node name="GalvanicElement" type="RichTextLabel" parent="Task/VBoxContainer/HBoxContainer" unique_id=270899643]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "{NO_FORMULA}
+"
+fit_content = true
+scroll_active = false
+custom_effects = [SubResource("RichTextEffect_6qyph"), SubResource("RichTextEffect_u4l1f")]
+
+[node name="VBoxContainer2" type="HBoxContainer" parent="Task/VBoxContainer" unique_id=297294787]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Task/VBoxContainer/VBoxContainer2" unique_id=1268238218]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[i][color=\"ff0000\"]Анодом[/color][/i] [color=black]является[/color]"
+fit_content = true
+scroll_active = false
+custom_effects = [SubResource("RichTextEffect_6qyph"), SubResource("RichTextEffect_u4l1f")]
+
+[node name="AnodeIs" type="LineEdit" parent="Task/VBoxContainer/VBoxContainer2" unique_id=1716390609]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+placeholder_text = "Водород"
+
+[node name="HSeparator" type="HSeparator" parent="Task/VBoxContainer/VBoxContainer2" unique_id=1950411706]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_j8hbm")
+
+[node name="VBoxContainer3" type="HBoxContainer" parent="Task/VBoxContainer" unique_id=1526163931]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Task/VBoxContainer/VBoxContainer3" unique_id=1299102243]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[i][color=\"ff0000\"]Катодом[/color][/i] [color=black]является[/color]"
+fit_content = true
+scroll_active = false
+custom_effects = [SubResource("RichTextEffect_6qyph"), SubResource("RichTextEffect_u4l1f")]
+
+[node name="KatodeIs" type="LineEdit" parent="Task/VBoxContainer/VBoxContainer3" unique_id=2091402800]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+placeholder_text = "Водород"
+
+[node name="HSeparator" type="HSeparator" parent="Task/VBoxContainer/VBoxContainer3" unique_id=759191805]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_j8hbm")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Task/VBoxContainer" unique_id=65784859]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[i]Протекают процессы:[/i]"
+fit_content = true
+scroll_active = false
+custom_effects = [SubResource("RichTextEffect_6qyph"), SubResource("RichTextEffect_u4l1f")]
+
+[node name="Table" type="PanelContainer" parent="Task/VBoxContainer" unique_id=2005638132]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_24qj6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Task/VBoxContainer/Table" unique_id=1250246641]
+layout_mode = 2
+
+[node name="SP2" type="HSeparator" parent="Task/VBoxContainer/Table/VBoxContainer" unique_id=467938631]
+layout_mode = 2
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxLine_j8hbm")
+
+[node name="Anod" type="HBoxContainer" parent="Task/VBoxContainer/Table/VBoxContainer" unique_id=1283905743]
+layout_mode = 2
+
+[node name="SP3" type="VSeparator" parent="Task/VBoxContainer/Table/VBoxContainer/Anod" unique_id=1307739117]
+layout_mode = 2
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxLine_24qj6")
+
+[node name="AnodFormule" type="HBoxContainer" parent="Task/VBoxContainer/Table/VBoxContainer/Anod" unique_id=429923665]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AnodText" type="RichTextLabel" parent="Task/VBoxContainer/Table/VBoxContainer/Anod/AnodFormule" unique_id=1218735114]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.15
+bbcode_enabled = true
+text = "[color=\"ff0000\"]Анод:
+[/color]"
+fit_content = true
+scroll_active = false
+custom_effects = [SubResource("RichTextEffect_6qyph"), SubResource("RichTextEffect_u4l1f")]
+
+[node name="AnodeFormula" type="LineEdit" parent="Task/VBoxContainer/Table/VBoxContainer/Anod/AnodFormule" unique_id=663254241]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+placeholder_text = "CuOH"
+
+[node name="SP" type="VSeparator" parent="Task/VBoxContainer/Table/VBoxContainer/Anod" unique_id=1113466886]
+layout_mode = 2
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxLine_24qj6")
+
+[node name="AnodNumber" type="HBoxContainer" parent="Task/VBoxContainer/Table/VBoxContainer/Anod" unique_id=1875658529]
+layout_mode = 2
+
+[node name="AnodeNum" type="SpinBox" parent="Task/VBoxContainer/Table/VBoxContainer/Anod/AnodNumber" unique_id=2037882845]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+
+[node name="SP2" type="VSeparator" parent="Task/VBoxContainer/Table/VBoxContainer/Anod" unique_id=1334532494]
+layout_mode = 2
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxLine_24qj6")
+
+[node name="Sp" type="HSeparator" parent="Task/VBoxContainer/Table/VBoxContainer" unique_id=712038640]
+layout_mode = 2
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxLine_j8hbm")
+
+[node name="Katod" type="HBoxContainer" parent="Task/VBoxContainer/Table/VBoxContainer" unique_id=392811889]
+layout_mode = 2
+
+[node name="SP3" type="VSeparator" parent="Task/VBoxContainer/Table/VBoxContainer/Katod" unique_id=1264388203]
+layout_mode = 2
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxLine_24qj6")
+
+[node name="KatodFormule" type="HBoxContainer" parent="Task/VBoxContainer/Table/VBoxContainer/Katod" unique_id=400007902]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="KatodText" type="RichTextLabel" parent="Task/VBoxContainer/Table/VBoxContainer/Katod/KatodFormule" unique_id=848410154]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.15
+bbcode_enabled = true
+text = "[color=\"ff0000\"]Катод:
+[/color]"
+fit_content = true
+scroll_active = false
+custom_effects = [SubResource("RichTextEffect_6qyph"), SubResource("RichTextEffect_u4l1f")]
+
+[node name="KatodeFormula" type="LineEdit" parent="Task/VBoxContainer/Table/VBoxContainer/Katod/KatodFormule" unique_id=1489566614]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+placeholder_text = "Na2SO4"
+
+[node name="SP" type="VSeparator" parent="Task/VBoxContainer/Table/VBoxContainer/Katod" unique_id=1720702431]
+layout_mode = 2
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxLine_24qj6")
+
+[node name="KatodNumber" type="HBoxContainer" parent="Task/VBoxContainer/Table/VBoxContainer/Katod" unique_id=424684398]
+layout_mode = 2
+
+[node name="KatodNum" type="SpinBox" parent="Task/VBoxContainer/Table/VBoxContainer/Katod/KatodNumber" unique_id=100612910]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+
+[node name="SP2" type="VSeparator" parent="Task/VBoxContainer/Table/VBoxContainer/Katod" unique_id=317926045]
+layout_mode = 2
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxLine_24qj6")
+
+[node name="SP" type="HSeparator" parent="Task/VBoxContainer/Table/VBoxContainer" unique_id=2097346199]
+layout_mode = 2
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxLine_j8hbm")
+
+[node name="Ion" type="HBoxContainer" parent="Task/VBoxContainer/Table/VBoxContainer" unique_id=1079587025]
+layout_mode = 2
+
+[node name="SP3" type="VSeparator" parent="Task/VBoxContainer/Table/VBoxContainer/Ion" unique_id=757721551]
+layout_mode = 2
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxLine_24qj6")
+
+[node name="KatodFormule" type="HBoxContainer" parent="Task/VBoxContainer/Table/VBoxContainer/Ion" unique_id=1595856590]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="IonFormula" type="LineEdit" parent="Task/VBoxContainer/Table/VBoxContainer/Ion/KatodFormule" unique_id=1789254208]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+placeholder_text = "Na2SO4"
+
+[node name="SP" type="VSeparator" parent="Task/VBoxContainer/Table/VBoxContainer/Ion" unique_id=648016271]
+layout_mode = 2
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxLine_24qj6")
+
+[node name="KatodNumber" type="HBoxContainer" parent="Task/VBoxContainer/Table/VBoxContainer/Ion" unique_id=1731414588]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Task/VBoxContainer/Table/VBoxContainer/Ion/KatodNumber" unique_id=1926889337]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[i]Ионное уравнение"
+fit_content = true
+
+[node name="SP2" type="VSeparator" parent="Task/VBoxContainer/Table/VBoxContainer/Ion" unique_id=405054006]
+layout_mode = 2
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxLine_24qj6")
+
+[node name="SP3" type="HSeparator" parent="Task/VBoxContainer/Table/VBoxContainer" unique_id=1890229154]
+layout_mode = 2
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxLine_j8hbm")
+
+[node name="Molekular" type="HBoxContainer" parent="Task/VBoxContainer/Table/VBoxContainer" unique_id=1790024506]
+layout_mode = 2
+
+[node name="SP3" type="VSeparator" parent="Task/VBoxContainer/Table/VBoxContainer/Molekular" unique_id=576258378]
+layout_mode = 2
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxLine_24qj6")
+
+[node name="KatodFormule" type="HBoxContainer" parent="Task/VBoxContainer/Table/VBoxContainer/Molekular" unique_id=342270301]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MolekularFormula" type="LineEdit" parent="Task/VBoxContainer/Table/VBoxContainer/Molekular/KatodFormule" unique_id=2120564813]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+placeholder_text = "Na2SO4"
+
+[node name="SP" type="VSeparator" parent="Task/VBoxContainer/Table/VBoxContainer/Molekular" unique_id=1906168058]
+layout_mode = 2
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxLine_24qj6")
+
+[node name="KatodNumber" type="HBoxContainer" parent="Task/VBoxContainer/Table/VBoxContainer/Molekular" unique_id=605441733]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Task/VBoxContainer/Table/VBoxContainer/Molekular/KatodNumber" unique_id=447578233]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[i]Молекулярное уравнение"
+fit_content = true
+
+[node name="SP2" type="VSeparator" parent="Task/VBoxContainer/Table/VBoxContainer/Molekular" unique_id=2141646984]
+layout_mode = 2
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxLine_24qj6")
+
+[node name="SP4" type="HSeparator" parent="Task/VBoxContainer/Table/VBoxContainer" unique_id=592665039]
+layout_mode = 2
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxLine_j8hbm")
+
+[node name="SpecialSymbols" type="LineEdit" parent="Task/VBoxContainer" unique_id=709897432]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_6qyph")
+text = "ē ↓"
+placeholder_text = "ē ↓"
+alignment = 1
+virtual_keyboard_enabled = false
+script = SubResource("GDScript_6qyph")
+
+[node name="CheckTask" type="Button" parent="Task/VBoxContainer" unique_id=1487075677]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Проверить"
+
+[node name="NextTask" type="Button" parent="Task/VBoxContainer" unique_id=1359148012]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+disabled = true
+text = "Следующее задание"
+
+[node name="ResultLabel" type="Label" parent="Task/VBoxContainer" unique_id=312670670]
+unique_name_in_owner = true
+layout_mode = 2
+label_settings = SubResource("LabelSettings_6qyph")
+horizontal_alignment = 1
+
+[node name="LoadingPanel" type="Panel" parent="." unique_id=1929755269]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0b5v6")
+
+[node name="Panel2" type="Panel" parent="LoadingPanel" unique_id=1091087065]
+material = ExtResource("2_jdkty")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0b5v6")
+
+[node name="Label" type="Label" parent="LoadingPanel" unique_id=996693914]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Загружаю задание..."
+label_settings = SubResource("LabelSettings_c48n2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TaskHandler" type="Node" parent="." unique_id=1651736646 node_paths=PackedStringArray("check_btn", "next_btn")]
+script = ExtResource("5_j8hbm")
+Tasks = SubResource("Resource_20le8")
+check_btn = NodePath("../Task/VBoxContainer/CheckTask")
+next_btn = NodePath("../Task/VBoxContainer/NextTask")
+
+[node name="Timer" type="Timer" parent="." unique_id=821778373]
+one_shot = true
+autostart = true
+script = SubResource("GDScript_u4l1f")
+
+[connection signal="text_change_rejected" from="Task/VBoxContainer/SpecialSymbols" to="Task/VBoxContainer/SpecialSymbols" method="update"]
+[connection signal="text_changed" from="Task/VBoxContainer/SpecialSymbols" to="Task/VBoxContainer/SpecialSymbols" method="update"]
+[connection signal="text_submitted" from="Task/VBoxContainer/SpecialSymbols" to="Task/VBoxContainer/SpecialSymbols" method="update"]

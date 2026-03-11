@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bqctqakh2187"]
+
+[sub_resource type="GDScript" id="GDScript_vrr7e"]
+resource_name = "Handler"
+script/source = "extends Button
+
+@export var task_id:int
+
+func _pressed():
+	get_tree().change_scene_to_file(\"res://scenes/Task.tscn\")
+	GameInstance.task_id = task_id
+"
+
+[node name="OpenSceneButton" type="Button" unique_id=1790221241]
+script = SubResource("GDScript_vrr7e")

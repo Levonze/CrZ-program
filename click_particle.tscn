@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://csholwyvnivpx"]
+
+[ext_resource type="Texture2D" uid="uid://dclckr1m7nr0n" path="res://circle.svg" id="1_lij31"]
+
+[sub_resource type="Curve" id="Curve_lij31"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_lij31"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GDScript" id="GDScript_ldxmo"]
+script/source = "extends CPUParticles2D
+
+func _on_finished():
+	queue_free()
+"
+
+[node name="ClickParticle" type="CPUParticles2D" unique_id=800088237]
+emitting = false
+amount = 1
+texture = ExtResource("1_lij31")
+one_shot = true
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_lij31")
+color_ramp = SubResource("Gradient_lij31")
+script = SubResource("GDScript_ldxmo")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://iegnrvyd8odr"]
+
+[ext_resource type="Theme" uid="uid://c71srdrc14t5l" path="res://assets/Styles/MainTheme.res" id="1_bo66w"]
+[ext_resource type="Script" uid="uid://cmmho4esohdgw" path="res://scenes/task_selector.gd" id="2_2a1bq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2a1bq"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2a1bq"]
+font_size = 40
+font_color = Color(0, 0, 0, 1)
+
+[node name="Tasks" type="Control" unique_id=1801881757]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bo66w")
+script = ExtResource("2_2a1bq")
+
+[node name="Panel" type="Panel" parent="." unique_id=183053474]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_right = 0.9
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2a1bq")
+
+[node name="GridContainer" type="GridContainer" parent="Panel" unique_id=1852856748]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 120.799995
+offset_top = 82.0
+offset_right = -120.79999
+offset_bottom = -67.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 7
+
+[node name="Label" type="Label" parent="Panel" unique_id=1333586294]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -168.0
+offset_right = 168.0
+offset_bottom = 55.0
+grow_horizontal = 2
+text = "Выбери задание"
+label_settings = SubResource("LabelSettings_2a1bq")

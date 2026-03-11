@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dukyx6tbw7dux"]
+
+[ext_resource type="Shader" uid="uid://b4ccsi6rmwoqr" path="res://assets/Shaders/blur.gdshader" id="1_ks3rk"]
+
+[resource]
+shader = ExtResource("1_ks3rk")
+shader_parameter/blur_radius = 8
+shader_parameter/blur_strength = 10.0
+shader_parameter/fade_direction = 2
+shader_parameter/fade_cutoff = 1.0
+shader_parameter/fade_intensity = 2.0
