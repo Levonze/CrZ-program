@@ -4,12 +4,20 @@ class_name TaskManager
 @export var cur_task:int = 1
 @export var Tasks:TaskContainer
 
+@export var prev_btn:Button
 @export var check_btn:Button
 @export var next_btn:Button
 
 func _ready() -> void:
+	prev_btn.pressed.connect(handle_prev)
 	check_btn.pressed.connect(handle_check)
 	next_btn.pressed.connect(handle_next)
+	
+	if GameInstance.task_id == 9:
+		next_btn.disabled = true
+	
+	if GameInstance.task_id == 0:
+		prev_btn.disabled = true
 
 func load_task(id:int):
 	print(id)
@@ -20,6 +28,7 @@ func load_task(id:int):
 	%GalvanicElement.text = data.task_scheme
 	
 	clear_fields()
+	%TaskNum.text = "Задание: " + str(id+1)
 	
 func clear_fields():
 	%AnodeIs.text = ""
@@ -61,4 +70,9 @@ func check() -> bool:
 func handle_next():
 	if GameInstance.task_id < 10:
 		GameInstance.task_id += 1
+		get_tree().change_scene_to_file("res://scenes/Task.tscn")
+
+func handle_prev():
+	if GameInstance.task_id > 0:
+		GameInstance.task_id -= 1
 		get_tree().change_scene_to_file("res://scenes/Task.tscn")
