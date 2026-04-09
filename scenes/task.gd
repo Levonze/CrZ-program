@@ -20,7 +20,6 @@ func _ready() -> void:
 		prev_btn.disabled = true
 
 func load_task(id:int):
-	print(id)
 	var data = Tasks.Tasks[int(id - 1)]
 	cur_task = id
 	
@@ -29,6 +28,21 @@ func load_task(id:int):
 	
 	clear_fields()
 	%TaskNum.text = "Задание: " + str(id+1)
+	
+	print("=========="+
+	"\nЗагружено задание.\n"+"ID: "+str(id)+
+	"\nNumber: "+str(id+1)+
+	"\nTaskElement: "+data.task_data+
+	"\nScheme: "+data.task_scheme+
+	"\n\nAnodeIs: "+data.anod_element+
+	"\nKatodeIs: "+data.katod_element+
+	"\nAnode Formula: "+data.anod_formula+
+	"\nKatode Formula: "+data.katod_formula+
+	"\nAnode Index: "+str(data.anod_int)+
+	"\nKatode Index: "+str(data.katod_int)+
+	"\nIon Formula: "+data.ion_formula+
+	"\nMolekular Formula: "+data.molekula_formula+
+	"\n==========")
 	
 func clear_fields():
 	%AnodeIs.text = ""
@@ -44,11 +58,9 @@ func handle_check():
 	if check():
 		%ResultLabel.text = "Все верно"
 		%ResultLabel.label_settings.font_color = Color(0,.5,0)
-		%NextTask.disabled = false
 	else:
 		%ResultLabel.text = "Где-то ошибка.\n\nПишите формулы без пробелов\n❌: Pb - 2ē = Pb2+\n✅: Pb-2ē=Pb2+"
 		%ResultLabel.label_settings.font_color = Color(1,0,0)
-		%NextTask.disabled = true
 
 func check() -> bool:
 	var data = Tasks.Tasks[cur_task - 1]

@@ -2,6 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://c71srdrc14t5l" path="res://assets/Styles/MainTheme.res" id="1_bo66w"]
 [ext_resource type="Script" uid="uid://cmmho4esohdgw" path="res://scenes/task_selector.gd" id="2_2a1bq"]
+[ext_resource type="Material" uid="uid://qcn2ykn82fr8" path="res://assets/BG.tres" id="3_0yr0b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2a1bq"]
 bg_color = Color(1, 1, 1, 1)
@@ -9,6 +10,16 @@ bg_color = Color(1, 1, 1, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_2a1bq"]
 font_size = 40
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="GDScript" id="GDScript_2a1bq"]
+resource_name = "OpenScene"
+script/source = "extends Button
+
+
+
+func _pressed():
+	get_tree().change_scene_to_file(\"res://scenes/Theory.tscn\")
+"
 
 [node name="Tasks" type="Control" unique_id=1801881757]
 layout_mode = 3
@@ -19,6 +30,16 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_bo66w")
 script = ExtResource("2_2a1bq")
+
+[node name="Panel2" type="Panel" parent="." unique_id=149983643]
+z_index = -1
+material = ExtResource("3_0yr0b")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="." unique_id=183053474]
 layout_mode = 1
@@ -41,7 +62,7 @@ offset_right = -120.79999
 offset_bottom = -67.0
 grow_horizontal = 2
 grow_vertical = 2
-columns = 7
+columns = 9
 
 [node name="Label" type="Label" parent="Panel" unique_id=1333586294]
 layout_mode = 1
@@ -54,3 +75,18 @@ offset_bottom = 55.0
 grow_horizontal = 2
 text = "Выбери задание"
 label_settings = SubResource("LabelSettings_2a1bq")
+
+[node name="Button" type="Button" parent="." unique_id=829549608]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -132.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 25
+text = "К теории"
+script = SubResource("GDScript_2a1bq")

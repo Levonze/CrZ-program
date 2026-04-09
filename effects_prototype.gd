@@ -1,6 +1,6 @@
 extends Node2D
 
-var enabled = true
+var enabled = false
 
 const click_prt = "res://click_particle.tscn"
 

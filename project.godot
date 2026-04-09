@@ -27,6 +27,10 @@ LimboConsole="*uid://dyxornv8vwibg"
 EffectsPrototype="*uid://bw8yc87tcm0kn"
 GameInstance="*uid://c7pkfy1qeu26q"
 
+[display]
+
+window/size/resizable=false
+
 [dotnet]
 
 project/assembly_name="ChimestryProgram"
