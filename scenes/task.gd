@@ -20,7 +20,7 @@ func _ready() -> void:
 		prev_btn.disabled = true
 
 func load_task(id:int):
-	var data = Tasks.Tasks[int(id - 1)]
+	var data = Tasks.Tasks[int(id)]
 	cur_task = id
 	
 	%TaskElement.text = data.task_data
