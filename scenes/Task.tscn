@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://b1l7c8jfcpevv"]
 
 [ext_resource type="Theme" uid="uid://c71srdrc14t5l" path="res://assets/Styles/MainTheme.res" id="1_c48n2"]
-[ext_resource type="Material" uid="uid://qcn2ykn82fr8" path="res://assets/BG.tres" id="2_6dc8f"]
 [ext_resource type="LabelSettings" uid="uid://dgb358upcv2hk" path="res://assets/TextFonts/header_ls.tres" id="2_evwom"]
 [ext_resource type="Material" uid="uid://dukyx6tbw7dux" path="res://assets/Shaders/blur.tres" id="2_jdkty"]
 [ext_resource type="Script" uid="uid://d3k7ijmmnmxra" path="res://assets/RichTextEffects/SubTag.gd" id="3_j8hbm"]
@@ -198,16 +197,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_c48n2")
-
-[node name="Panel" type="Panel" parent="." unique_id=864189467]
-z_index = -1
-material = ExtResource("2_6dc8f")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Task" type="Panel" parent="." unique_id=334360213]
 layout_mode = 1

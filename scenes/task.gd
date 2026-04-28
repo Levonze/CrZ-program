@@ -63,7 +63,7 @@ func handle_check():
 		%ResultLabel.label_settings.font_color = Color(1,0,0)
 
 func check() -> bool:
-	var data = Tasks.Tasks[cur_task - 1]
+	var data = Tasks.Tasks[cur_task]
 	
 	if (
 		%AnodeIs.text.to_lower() == data.anod_element.to_lower() and

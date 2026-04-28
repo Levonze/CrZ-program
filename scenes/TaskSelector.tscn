@@ -2,7 +2,6 @@
 
 [ext_resource type="Theme" uid="uid://c71srdrc14t5l" path="res://assets/Styles/MainTheme.res" id="1_bo66w"]
 [ext_resource type="Script" uid="uid://cmmho4esohdgw" path="res://scenes/task_selector.gd" id="2_2a1bq"]
-[ext_resource type="Material" uid="uid://qcn2ykn82fr8" path="res://assets/BG.tres" id="3_0yr0b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2a1bq"]
 bg_color = Color(1, 1, 1, 1)
@@ -30,16 +29,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_bo66w")
 script = ExtResource("2_2a1bq")
-
-[node name="Panel2" type="Panel" parent="." unique_id=149983643]
-z_index = -1
-material = ExtResource("3_0yr0b")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="." unique_id=183053474]
 layout_mode = 1
