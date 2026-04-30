@@ -20,7 +20,7 @@ func _pressed():
 	get_tree().change_scene_to_file(\"res://scenes/Theory.tscn\")
 "
 
-[node name="Tasks" type="Control" unique_id=1801881757]
+[node name="Tasks" type="Control" unique_id=1801881757 node_paths=PackedStringArray("container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,6 +29,16 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_bo66w")
 script = ExtResource("2_2a1bq")
+container = NodePath("Panel/GridContainer")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1075897227]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.47170383, 0.4717039, 0.47170383, 1)
 
 [node name="Panel" type="Panel" parent="." unique_id=183053474]
 layout_mode = 1
@@ -40,7 +50,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2a1bq")
 
-[node name="GridContainer" type="GridContainer" parent="Panel" unique_id=1852856748]
+[node name="GridContainer" type="HFlowContainer" parent="Panel" unique_id=355424596]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,7 +61,8 @@ offset_right = -120.79999
 offset_bottom = -67.0
 grow_horizontal = 2
 grow_vertical = 2
-columns = 9
+alignment = 1
+last_wrap_alignment = 1
 
 [node name="Label" type="Label" parent="Panel" unique_id=1333586294]
 layout_mode = 1
@@ -62,20 +73,21 @@ offset_left = -168.0
 offset_right = 168.0
 offset_bottom = 55.0
 grow_horizontal = 2
-text = "Выбери задание"
+text = "Выберите задание"
 label_settings = SubResource("LabelSettings_2a1bq")
 
 [node name="Button" type="Button" parent="." unique_id=829549608]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -132.0
-offset_top = -40.0
-grow_horizontal = 0
+offset_left = -101.5
+offset_top = -43.0
+offset_right = 101.5
+grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 25
-text = "К теории"
+text = "Назад к теории"
 script = SubResource("GDScript_2a1bq")

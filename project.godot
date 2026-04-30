@@ -29,7 +29,7 @@ GameInstance="*uid://c7pkfy1qeu26q"
 
 [display]
 
-window/size/resizable=false
+window/size/sharp_corners=true
 
 [dotnet]
 
@@ -37,7 +37,7 @@ project/assembly_name="ChimestryProgram"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/limbo_console/plugin.cfg")
+enabled=PackedStringArray("res://addons/customexport/plugin.cfg", "res://addons/limbo_console/plugin.cfg")
 
 [input]
 

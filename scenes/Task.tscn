@@ -37,6 +37,18 @@ vertical = true
 
 [sub_resource type="Theme" id="Theme_evwom"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_evwom"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.7857086, 1, 0.764763, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 1, 0, 1)
+
 [sub_resource type="GDScript" id="GDScript_6qyph"]
 script/source = "extends LineEdit
 
@@ -65,7 +77,8 @@ metadata/_custom_type_script = "uid://liwd686tdt1g"
 
 [sub_resource type="Resource" id="Resource_u4l1f"]
 script = ExtResource("6_6qyph")
-task_data = "E[sub]ок[/sub]= + 0,34 В > E[sub]восст[/sub] = - 0,76 В"
+task_data = "E[sub]ок[/sub]= - 0,44 В > E[sub]восст[/sub] = - 0,76 В"
+task_scheme = "Zn|HCl| Fe"
 anod_element = "цинк"
 katod_element = "железо"
 anod_formula = "Zn-2ē=Zn2+"
@@ -77,7 +90,7 @@ metadata/_custom_type_script = "uid://liwd686tdt1g"
 
 [sub_resource type="Resource" id="Resource_evwom"]
 script = ExtResource("6_6qyph")
-task_data = "E[sub]ок[/sub]= + 0,25 В > E[sub]восст[/sub] = - 0,44 В"
+task_data = "E[sub]ок[/sub]= - 0,25 В > E[sub]восст[/sub] = - 0,44 В"
 task_scheme = "Fe |H[sub]2[/sub]SO[sub]4[/sub] | Ni"
 katod_element = "никель"
 anod_formula = "Fe-2ē=Fe2+"
@@ -198,6 +211,15 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_c48n2")
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=744898857]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.47170383, 0.4717039, 0.47170383, 1)
+
 [node name="Task" type="Panel" parent="." unique_id=334360213]
 layout_mode = 1
 anchors_preset = -1
@@ -264,7 +286,7 @@ layout_mode = 2
 [node name="RichTextLabel3" type="RichTextLabel" parent="Task/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1212044377]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.75
+size_flags_stretch_ratio = 0.63
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "[b][i]Схема микрогальванического элемента[/i][/b]: 
@@ -571,27 +593,37 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_evwom")
 theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_evwom")
 text = "ē↓↑"
 alignment = 1
 virtual_keyboard_enabled = false
 script = SubResource("GDScript_6qyph")
 
-[node name="CheckTask" type="Button" parent="Task/ScrollContainer/VBoxContainer" unique_id=1487075677]
+[node name="ResultLabel" type="Label" parent="Task/ScrollContainer/VBoxContainer" unique_id=312670670]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 4
-text = "Проверить"
+label_settings = SubResource("LabelSettings_6qyph")
+horizontal_alignment = 1
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Task/ScrollContainer/VBoxContainer" unique_id=1424304145]
-layout_mode = 2
+[node name="HBoxContainer3" type="HBoxContainer" parent="Task" unique_id=750660359]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -41.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
 alignment = 1
 
-[node name="PrevTask" type="Button" parent="Task/ScrollContainer/VBoxContainer/HBoxContainer3" unique_id=397205636]
+[node name="PrevTask" type="Button" parent="Task/HBoxContainer3" unique_id=1751730350]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Назад"
 
-[node name="TaskList" type="Button" parent="Task/ScrollContainer/VBoxContainer/HBoxContainer3" unique_id=1398682768]
+[node name="TaskList" type="Button" parent="Task/HBoxContainer3" unique_id=174465244]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -599,17 +631,27 @@ text = "К списку заданий"
 script = ExtResource("4_20le8")
 scene = ExtResource("5_evwom")
 
-[node name="NextTask" type="Button" parent="Task/ScrollContainer/VBoxContainer/HBoxContainer3" unique_id=1359148012]
+[node name="NextTask" type="Button" parent="Task/HBoxContainer3" unique_id=1307383601]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Вперед"
 
-[node name="ResultLabel" type="Label" parent="Task/ScrollContainer/VBoxContainer" unique_id=312670670]
-unique_name_in_owner = true
-layout_mode = 2
-label_settings = SubResource("LabelSettings_6qyph")
-horizontal_alignment = 1
+[node name="CheckTask" type="Button" parent="Task" unique_id=1487075677]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -49.0
+offset_top = -76.0
+offset_right = 49.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+text = "Проверить"
 
 [node name="LoadingPanel" type="Panel" parent="." unique_id=1929755269]
 visible = false
@@ -646,9 +688,9 @@ vertical_alignment = 1
 [node name="TaskHandler" type="Node" parent="." unique_id=1651736646 node_paths=PackedStringArray("prev_btn", "check_btn", "next_btn")]
 script = ExtResource("5_j8hbm")
 Tasks = SubResource("Resource_20le8")
-prev_btn = NodePath("../Task/ScrollContainer/VBoxContainer/HBoxContainer3/PrevTask")
-check_btn = NodePath("../Task/ScrollContainer/VBoxContainer/CheckTask")
-next_btn = NodePath("../Task/ScrollContainer/VBoxContainer/HBoxContainer3/NextTask")
+prev_btn = NodePath("../Task/HBoxContainer3/PrevTask")
+check_btn = NodePath("../Task/CheckTask")
+next_btn = NodePath("../Task/HBoxContainer3/NextTask")
 
 [node name="Timer" type="Timer" parent="." unique_id=821778373]
 wait_time = 0.1
@@ -659,4 +701,4 @@ script = SubResource("GDScript_u4l1f")
 [connection signal="text_change_rejected" from="Task/ScrollContainer/VBoxContainer/SpecialSymbols" to="Task/ScrollContainer/VBoxContainer/SpecialSymbols" method="update"]
 [connection signal="text_changed" from="Task/ScrollContainer/VBoxContainer/SpecialSymbols" to="Task/ScrollContainer/VBoxContainer/SpecialSymbols" method="update"]
 [connection signal="text_submitted" from="Task/ScrollContainer/VBoxContainer/SpecialSymbols" to="Task/ScrollContainer/VBoxContainer/SpecialSymbols" method="update"]
-[connection signal="pressed" from="Task/ScrollContainer/VBoxContainer/HBoxContainer3/TaskList" to="Task/ScrollContainer/VBoxContainer/HBoxContainer3/TaskList" method="_on_pressed"]
+[connection signal="pressed" from="Task/HBoxContainer3/TaskList" to="Task/HBoxContainer3/TaskList" method="_on_pressed"]

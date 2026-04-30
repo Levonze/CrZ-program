@@ -146,7 +146,17 @@ mouse_filter = 1
 theme = ExtResource("1_hwyk8")
 script = SubResource("GDScript_ry1lq")
 
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1833869113]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.47170383, 0.4717039, 0.47170383, 1)
+
 [node name="Button" type="Button" parent="." unique_id=1074607351]
+z_index = 1
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -170,7 +180,6 @@ text = "Reload"
 script = SubResource("GDScript_hwyk8")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1533287463]
-z_index = -1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
